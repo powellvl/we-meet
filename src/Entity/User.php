@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -38,6 +40,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
+
+    /**
+     * @var Collection<int, Answer>
+     */
+    #[ORM\OneToMany(targetEntity: Answer::class, mappedBy: 'user')]
+    private Collection $answers;
+
+    /**
+     * @var Collection<int, LanguageManagement>
+     */
+    #[ORM\OneToMany(targetEntity: LanguageManagement::class, mappedBy: 'user')]
+    private Collection $languageManagement;
+
+    public function __construct()
+    {
+        $this->answers = new ArrayCollection();
+        $this->languageManagement = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -134,6 +154,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastname(string $lastname): static
     {
         $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Answer>
+     */
+    public function getAnswers(): Collection
+    {
+        return $this->answers;
+    }
+
+    public function addAnswer(Answer $answer): static
+    {
+        if (!$this->answers->contains($answer)) {
+            $this->answers->add($answer);
+            $answer->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnswer(Answer $answer): static
+    {
+        if ($this->answers->removeElement($answer)) {
+            // set the owning side to null (unless already changed)
+            if ($answer->getUser() === $this) {
+                $answer->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, LanguageManagement>
+     */
+    public function getLanguageManagement(): Collection
+    {
+        return $this->languageManagement;
+    }
+
+    public function addLanguageManagement(LanguageManagement $languageManagement): static
+    {
+        if (!$this->languageManagement->contains($languageManagement)) {
+            $this->languageManagement->add($languageManagement);
+            $languageManagement->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLanguageManagement(LanguageManagement $languageManagement): static
+    {
+        if ($this->languageManagement->removeElement($languageManagement)) {
+            // set the owning side to null (unless already changed)
+            if ($languageManagement->getUser() === $this) {
+                $languageManagement->setUser(null);
+            }
+        }
 
         return $this;
     }
