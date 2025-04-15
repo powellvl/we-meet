@@ -19,6 +19,9 @@ class LanguageManagement
     #[ORM\ManyToOne(inversedBy: 'languageManagement')]
     private ?Language $language = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private bool $isProfessor = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -47,4 +50,15 @@ class LanguageManagement
 
         return $this;
     }
+
+    public function isProfessor(): bool
+    {
+    return $this->isProfessor;
+    }
+
+    public function setIsProfessor(bool $isProfessor): static
+    {
+    $this->isProfessor = $isProfessor;
+    return $this;
+    }   
 }

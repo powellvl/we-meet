@@ -23,15 +23,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
-    /**
-     * @var list<string> The user roles
-     */
     #[ORM\Column]
     private array $roles = [];
 
-    /**
-     * @var string The hashed password
-     */
     #[ORM\Column]
     private ?string $password = null;
 
@@ -41,22 +35,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
 
-    /**
-     * @var Collection<int, Answer>
-     */
     #[ORM\OneToMany(targetEntity: Answer::class, mappedBy: 'user')]
     private Collection $answers;
 
-    /**
-     * @var Collection<int, LanguageManagement>
-     */
-    #[ORM\OneToMany(targetEntity: LanguageManagement::class, mappedBy: 'user')]
-    private Collection $languageManagement;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: LanguageManagement::class, cascade: ['persist'], orphanRemoval: true)]
+    private Collection $languageManagements;
 
     public function __construct()
     {
         $this->answers = new ArrayCollection();
-        $this->languageManagement = new ArrayCollection();
+        $this->languageManagements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -72,47 +60,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
 
-    /**
-     * @see UserInterface
-     *
-     * @return list<string>
-     */
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
-
         return array_unique($roles);
     }
 
-    /**
-     * @param list<string> $roles
-     */
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
-
         return $this;
     }
 
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
     public function getPassword(): ?string
     {
         return $this->password;
@@ -121,16 +89,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): static
     {
         $this->password = $password;
-
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
 
@@ -142,7 +105,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFirstname(string $firstname): static
     {
         $this->firstname = $firstname;
-
         return $this;
     }
 
@@ -154,7 +116,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastname(string $lastname): static
     {
         $this->lastname = $lastname;
-
         return $this;
     }
 
@@ -179,7 +140,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeAnswer(Answer $answer): static
     {
         if ($this->answers->removeElement($answer)) {
-            // set the owning side to null (unless already changed)
             if ($answer->getUser() === $this) {
                 $answer->setUser(null);
             }
@@ -191,15 +151,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, LanguageManagement>
      */
-    public function getLanguageManagement(): Collection
+    public function getLanguageManagements(): Collection
     {
-        return $this->languageManagement;
+        return $this->languageManagements;
     }
 
     public function addLanguageManagement(LanguageManagement $languageManagement): static
     {
-        if (!$this->languageManagement->contains($languageManagement)) {
-            $this->languageManagement->add($languageManagement);
+        if (!$this->languageManagements->contains($languageManagement)) {
+            $this->languageManagements->add($languageManagement);
             $languageManagement->setUser($this);
         }
 
@@ -208,8 +168,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeLanguageManagement(LanguageManagement $languageManagement): static
     {
-        if ($this->languageManagement->removeElement($languageManagement)) {
-            // set the owning side to null (unless already changed)
+        if ($this->languageManagements->removeElement($languageManagement)) {
             if ($languageManagement->getUser() === $this) {
                 $languageManagement->setUser(null);
             }
