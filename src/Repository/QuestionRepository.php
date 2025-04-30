@@ -40,4 +40,17 @@ class QuestionRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findQuestionsForLanguages(array $languages): array
+{
+    $qb = $this->createQueryBuilder('q')
+        ->where('q.language IS NULL');
+
+    if (!empty($languages)) {
+        $qb->orWhere('q.language IN (:langs)')
+        ->setParameter('langs', $languages);
+    }
+
+    return $qb->getQuery()->getResult();
+}
 }

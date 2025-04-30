@@ -1,0 +1,58 @@
+{# filepath: /Applications/MAMP/htdocs/we_meet/templates/admin/layout.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration - {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="admin-container">
+    <div class="admin-sidebar">
+        <div class="admin-brand">
+            <h2>WeMeet Admin</h2>
+        </div>
+        <nav class="admin-nav">
+            <ul>
+                <li><a href="{{ path('app_admin_dashboard') }}" class="{{ app.request.get('_route') == 'app_admin_dashboard' ? 'active' : '' }}">
+                    <i class="fas fa-tachometer-alt"></i> Tableau de bord
+                </a></li>
+                
+                <li><a href="{{ path('app_user_index') }}" class="{{ app.request.get('_route') starts with 'app_admin_user' ? 'active' : '' }}">
+                    <i class="fas fa-users"></i> Utilisateurs
+                </a></li>
+                
+                <li><a href="{{ path('app_language_index') }}" class="{{ app.request.get('_route') starts with 'app_admin_language' ? 'active' : '' }}">
+                    <i class="fas fa-language"></i> Langues
+                </a></li>
+            </ul>
+        </nav>
+    </div>
+    
+    <div class="admin-content">
+        <header class="admin-header">
+            <div class="admin-header-title">
+                {% block admin_title %}Administration{% endblock %}
+            </div>
+            <div class="admin-header-user">
+                <span>{{ app.user.email }}</span>
+                <a href="{{ path('app_logout') }}" class="btn btn-sm btn-outline-danger">Déconnexion</a>
+            </div>
+        </header>
+        
+        <main class="admin-main">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            
+            {% block admin_content %}{% endblock %}
+        </main>
+    </div>
+</div>
+{% endblock %}

@@ -11,6 +11,15 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
+    <header>
+    {% if is_granted('ROLE_ADMIN') %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_admin_dashboard') }}">
+            <i class="fas fa-cog"></i> Administration
+        </a>
+    </li>
+{% endif %}
+    </header>
     <body>
         {% block body %}{% endblock %}
     </body>

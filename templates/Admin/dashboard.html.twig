@@ -1,0 +1,77 @@
+{# filepath: /Applications/MAMP/htdocs/we_meet/templates/admin/dashboard/index.html.twig #}
+{% extends 'admin/layout.html.twig' %}
+
+{% block admin_title %}Tableau de bord{% endblock %}
+
+{% block admin_content %}
+<div class="dashboard-stats">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Utilisateurs</h5>
+                    <h2>{{ stats.totalUsers }}</h2>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="{{ path('app_user_index') }}">Voir les détails</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card bg-success text-white mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Nouveaux utilisateurs</h5>
+                    <small>ce mois-ci</small>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="{{ path('app_user_index') }}">Voir les détails</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card bg-info text-white mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Langues disponibles</h5>
+                    <h2>{{ stats.totalLanguages }}</h2>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="{{ path('app_language_index') }}">Voir les détails</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-chart-bar me-1"></i>
+                Activité récente
+            </div>
+            <div class="card-body">
+                {# Ajoutez ici du contenu pour l'activité récente #}
+                <p>Graphique d'activité à venir...</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-bell me-1"></i>
+                Dernières alertes
+            </div>
+            <div class="card-body">
+                {# Ajoutez ici du contenu pour les alertes récentes #}
+                <p>Aucune alerte pour le moment</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
