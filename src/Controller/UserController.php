@@ -117,7 +117,6 @@ final class UserController extends AbstractController
         // Vérifier les permissions
         $redirectResponse = $this->isUserAdmin();
         if ($redirectResponse) {
-            return $redirectResponse;
         }
         
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->getString('_token'))) {

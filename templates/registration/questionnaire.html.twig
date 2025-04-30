@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Questionnaire d'évaluation{% endblock %}
+
+{% block body %}
+    <h1>Questionnaire d'évaluation</h1>
+
+    {{ form_start(form) }}
+    {% for field in form %}
+        <div class="mb-3">
+            {{ form_row(field) }}
+        </div>
+    {% endfor %}
+    <button class="btn btn-success">Envoyer mes réponses</button>
+    {{ form_end(form) }}
+{% endblock %}

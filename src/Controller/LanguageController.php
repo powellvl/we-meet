@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/language')]
 final class LanguageController extends AbstractController
 {
-    #[Route(name: 'app_language_index', methods: ['GET'])]
+    #[Route('', name: 'app_language_index', methods: ['GET'])]
     public function index(LanguageRepository $languageRepository): Response
     {
         return $this->render('language/index.html.twig', [
@@ -33,7 +33,7 @@ final class LanguageController extends AbstractController
             $entityManager->persist($language);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_language_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_language_index');
         }
 
         return $this->render('language/new.html.twig', [
@@ -58,8 +58,7 @@ final class LanguageController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-
-            return $this->redirectToRoute('app_language_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_language_index');
         }
 
         return $this->render('language/edit.html.twig', [
@@ -71,11 +70,11 @@ final class LanguageController extends AbstractController
     #[Route('/{id}', name: 'app_language_delete', methods: ['POST'])]
     public function delete(Request $request, Language $language, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$language->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $language->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($language);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_language_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_language_index');
     }
 }
