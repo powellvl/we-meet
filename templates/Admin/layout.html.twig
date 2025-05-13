@@ -23,6 +23,10 @@
                 <li><a href="{{ path('app_user_index') }}" class="{{ app.request.get('_route') starts with 'app_admin_user' ? 'active' : '' }}">
                     <i class="fas fa-users"></i> Utilisateurs
                 </a></li>
+
+                <li><a href="{{ path('admin_professor_pending') }}" class="{{ app.request.get('_route') == 'admin_professor_' ? 'active' : '' }}">
+                    <i class="fas fa-tachometer-alt"></i> Vérification
+                </a></li>
                 
                 <li><a href="{{ path('app_language_index') }}" class="{{ app.request.get('_route') starts with 'app_admin_language' ? 'active' : '' }}">
                     <i class="fas fa-language"></i> Langues

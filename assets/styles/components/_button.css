@@ -1,0 +1,53 @@
+.button-register {
+  background-color: var(--color-orange);
+  border: none;
+  color: white;
+  border-radius: 3px;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+.button-register:hover {
+  background-color: var(--color-white);
+  color: var(--color-orange);
+}
+.button-register:active {
+  background-color: var(--color-white);
+  color: var(--color-orange);
+  transform: translateY(4px);
+}
+.button-register:focus {
+  outline: none;
+}
+
+.button-login {
+  border-radius: 3px;
+  background-color: var(--color-orange);
+  color: var(--color-white);
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+.button-login:hover {
+  background-color: var(--color-white);
+  color: var(--color-orange);
+}
+.button-login:active {
+  background-color: var(--color-white);
+  color: var(--color-orange);
+  transform: translateY(4px);
+}
+.button-login:focus {
+  outline: none;
+}

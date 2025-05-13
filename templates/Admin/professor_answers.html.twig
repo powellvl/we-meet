@@ -1,0 +1,75 @@
+{# filepath: /Applications/MAMP/htdocs/we_meet/templates/Admin/professor_answers.html.twig #}
+{% extends 'admin/layout.html.twig' %}
+
+{% block admin_title %}Réponses de {{ user.firstname }} {{ user.lastname }}{% endblock %}
+
+{% block admin_content %}
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h4>Réponses au questionnaire de {{ user.firstname }} {{ user.lastname }}</h4>
+            <a href="{{ path('admin_professor_pending') }}" class="btn btn-sm btn-secondary">
+                <i class="fas fa-arrow-left"></i> Retour à la liste
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="user-info mb-4">
+                <h5>Informations de l'utilisateur</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Nom :</strong> {{ user.firstname }} {{ user.lastname }}</p>
+                        <p><strong>Email :</strong> {{ user.email }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Rôles actuels :</strong> {{ user.roles|join(', ') }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <h5>Réponses au questionnaire</h5>
+            {% if answers|length > 0 %}
+                <div class="answers-list mt-3">
+                    {% for answer in answers %}
+                        <div class="card mb-3">
+                            <div class="card-header bg-light">
+                                <strong>Question {{ loop.index }} :</strong> {{ answer.question.label }}
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-0">{{ answer.content }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    Cet utilisateur n'a pas encore répondu au questionnaire.
+                </div>
+            {% endif %}
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <a href="{{ path('admin_professor_accept', {id: user.id}) }}" class="btn btn-success">
+                        <i class="fas fa-check"></i> Approuver comme professeur
+                    </a>
+                    <a href="{{ path('admin_professor_reject', {id: user.id}) }}" class="btn btn-danger ms-2">
+                        <i class="fas fa-times"></i> Rejeter
+                    </a>
+                </div>
+                <a href="{{ path('admin_professor_pending') }}" class="btn btn-outline-secondary">
+                    Annuler
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {% if answers|length > 0 %}
+        <div class="d-flex justify-content-center mt-4">
+            <div class="alert alert-primary">
+                <i class="fas fa-info-circle me-2"></i>
+                Assurez-vous de bien lire toutes les réponses avant de prendre une décision.
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
