@@ -1,0 +1,7 @@
+#modalRoomParticipants > div {
+  transition: all 0.2s ease-in-out;
+}
+
+#modalRoomParticipants > div:hover {
+  transform: scale(1.01);
+}

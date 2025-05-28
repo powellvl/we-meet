@@ -30,10 +30,17 @@ class Language
     #[ORM\OneToMany(targetEntity: LanguageManagement::class, mappedBy: 'language')]
     private Collection $languageManagement;
 
+    /**
+     * @var Collection<int, Room>
+     */
+    #[ORM\OneToMany(targetEntity: Room::class, mappedBy: 'language')]
+    private Collection $rooms;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
         $this->languageManagement = new ArrayCollection();
+        $this->rooms = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -107,6 +114,36 @@ class Language
             // set the owning side to null (unless already changed)
             if ($languageManagement->getLanguage() === $this) {
                 $languageManagement->setLanguage(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Room>
+     */
+    public function getRooms(): Collection
+    {
+        return $this->rooms;
+    }
+
+    public function addRoom(Room $room): static
+    {
+        if (!$this->rooms->contains($room)) {
+            $this->rooms->add($room);
+            $room->setLanguage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRoom(Room $room): static
+    {
+        if ($this->rooms->removeElement($room)) {
+            // set the owning side to null (unless already changed)
+            if ($room->getLanguage() === $this) {
+                $room->setLanguage(null);
             }
         }
 

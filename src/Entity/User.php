@@ -41,10 +41,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: LanguageManagement::class, cascade: ['persist'], orphanRemoval: true)]
     private Collection $languageManagements;
 
+    /**
+     * @var Collection<int, Room>
+     */
+    #[ORM\OneToMany(targetEntity: Room::class, mappedBy: 'creator')]
+    private Collection $rooms;
+
+    /**
+     * @var Collection<int, Room>
+     */
+    #[ORM\ManyToMany(targetEntity: Room::class, mappedBy: 'participants')]
+    private Collection $roomsParticipated;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
         $this->languageManagements = new ArrayCollection();
+        $this->rooms = new ArrayCollection();
+        $this->roomsParticipated = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -172,6 +186,63 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             if ($languageManagement->getUser() === $this) {
                 $languageManagement->setUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Room>
+     */
+    public function getRooms(): Collection
+    {
+        return $this->rooms;
+    }
+
+    public function addRoom(Room $room): static
+    {
+        if (!$this->rooms->contains($room)) {
+            $this->rooms->add($room);
+            $room->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRoom(Room $room): static
+    {
+        if ($this->rooms->removeElement($room)) {
+            // set the owning side to null (unless already changed)
+            if ($room->getCreator() === $this) {
+                $room->setCreator(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Room>
+     */
+    public function getRoomsParticipated(): Collection
+    {
+        return $this->roomsParticipated;
+    }
+
+    public function addRoomsParticipated(Room $roomsParticipated): static
+    {
+        if (!$this->roomsParticipated->contains($roomsParticipated)) {
+            $this->roomsParticipated->add($roomsParticipated);
+            $roomsParticipated->addParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRoomsParticipated(Room $roomsParticipated): static
+    {
+        if ($this->roomsParticipated->removeElement($roomsParticipated)) {
+            $roomsParticipated->removeParticipant($this);
         }
 
         return $this;

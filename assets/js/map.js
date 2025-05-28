@@ -1,0 +1,95 @@
+export function initMap(rooms) {
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 12,
+    center: { lat: 44.8378, lng: -0.5792 }, // Bordeaux par défaut
+  });
+
+  rooms.forEach((room) => {
+    const marker = new google.maps.Marker({
+      position: { lat: room.latitude, lng: room.longitude },
+      map: map,
+      title: room.title,
+    });
+
+    marker.addListener("click", () => {
+      document.getElementById("modalRoomTitle").textContent = room.title;
+      document.getElementById("modalRoomDescription").textContent =
+        room.description;
+      document.getElementById("modalRoomDate").textContent = new Date(
+        room.date
+      ).toLocaleString("fr-FR");
+      document.getElementById("modalRoomLanguage").textContent =
+        room.language?.name ?? "Inconnue";
+
+      // Emoji par langue
+      const emojiMap = {
+        français: "🇫🇷",
+        english: "🇬🇧",
+        español: "🇪🇸",
+        deutsch: "🇩🇪",
+        italiano: "🇮🇹",
+        日本語: "🇯🇵",
+      };
+      const emoji = emojiMap[room.language?.name?.toLowerCase()] ?? "🌐";
+      document.getElementById("modalRoomEmoji").textContent = emoji;
+
+      // Places restantes
+      const maxParticipants = 4;
+      const currentCount = room.participants.length;
+      const remaining = maxParticipants - currentCount;
+      document.getElementById("modalRoomSlots").textContent =
+        remaining > 0 ? `${remaining} place(s)` : "Complet";
+
+      // Participants
+      const list = document.getElementById("modalRoomParticipants");
+      list.innerHTML = "";
+      if (room.participants.length === 0) {
+        list.innerHTML = `<p class="text-muted fst-italic">Aucun participant pour le moment.</p>`;
+      } else {
+        room.participants.forEach((p) => {
+          const div = document.createElement("div");
+          div.className =
+            "d-flex justify-content-between align-items-center p-2 rounded border bg-light shadow-sm";
+
+          div.innerHTML = `
+        <div>${p.firstname} ${p.lastname}</div>
+        <span class="badge bg-${p.isProfessor ? "success" : "secondary"}">
+          ${p.isProfessor ? "Professeur" : "Élève"}
+        </span>
+      `;
+          list.appendChild(div);
+        });
+      }
+
+      // Si user déjà inscrit ou créateur → désactiver bouton
+      const joinBtn = document.getElementById("joinRoomLink");
+      const isCurrentUser = room.currentUserId;
+      const isCreator = room.creatorId === isCurrentUser;
+      const alreadyJoined = room.participants.some(
+        (p) => p.id === isCurrentUser
+      );
+
+      if (isCreator) {
+        joinBtn.textContent = "Vous êtes l'organisateur";
+        joinBtn.className = "btn btn-outline-secondary w-100";
+        joinBtn.disabled = true;
+      } else if (alreadyJoined) {
+        joinBtn.textContent = "Déjà inscrit";
+        joinBtn.className = "btn btn-outline-success w-100";
+        joinBtn.disabled = true;
+      } else if (remaining === 0) {
+        joinBtn.textContent = "Complet";
+        joinBtn.className = "btn btn-outline-danger w-100";
+        joinBtn.disabled = true;
+      } else {
+        joinBtn.textContent = "Rejoindre l'activité";
+        joinBtn.className = "btn btn-primary w-100";
+        joinBtn.href = `/room/${room.id}/join`;
+        joinBtn.disabled = false;
+      }
+
+      // Afficher la modale
+      new bootstrap.Modal(document.getElementById("roomInfoModal")).show();
+    });
+  });
+}

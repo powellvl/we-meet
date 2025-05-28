@@ -13,6 +13,7 @@
  */
 return [
     'app' => [
+        'path' => 'assets/styles/app.css',
         'path' => './assets/app.js',
         'entrypoint' => true,
     ],

@@ -1,24 +1,112 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<h1>Carte des événements</h1>
+	<div id="map" style="height: 500px;"></div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Applications/MAMP/htdocs/we_meet/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>/Applications/MAMP/htdocs/we_meet/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
+	<!-- Bouton flottant -->
+	<button class="btn-floating" data-bs-toggle="modal" data-bs-target="#createRoomModal">+</button>
+
+	<!-- Modale de création -->
+	<div class="modal fade" id="createRoomModal" tabindex="-1" aria-labelledby="createRoomModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Créer un événement</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+				</div>
+				<div class="modal-body">
+					{{ form_start(form) }}
+					{{ form_row(form.title) }}
+					{{ form_row(form.description) }}
+					{{ form_row(form.date) }}
+					{{ form_row(form.language) }}
+					{{ form_row(form.latitude) }}
+					{{ form_row(form.longitude) }}
+					<div id="modal-map" style="height: 300px;"></div>
+					<button class="btn btn-success mt-3">Créer</button>
+					{{ form_end(form) }}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="roomInfoModal" tabindex="-1" aria-labelledby="roomInfoModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content shadow">
+				<div class="modal-header bg-light">
+					<h5 class="modal-title d-flex align-items-center gap-2" id="roomInfoModalLabel">
+						<span id="modalRoomEmoji" style="font-size: 1.5rem;"></span>
+						<span id="modalRoomTitle" class="fw-bold"></span>
+					</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+				</div>
+				<div class="modal-body">
+					<p class="mb-2" id="modalRoomDescription"></p>
+					<p class="mb-1">
+						<strong>Date :</strong>
+						<span id="modalRoomDate"></span><br>
+						<strong>Langue :</strong>
+						<span id="modalRoomLanguage"></span><br>
+						<strong>Places restantes :</strong>
+						<span id="modalRoomSlots"></span>
+					</p>
+
+					<hr>
+					<h6 class="mb-3">Participants</h6>
+					<div id="modalRoomParticipants" class="d-flex flex-column gap-2"></div>
+				</div>
+				<div class="modal-footer">
+					<a id="joinRoomLink" href="#" class="btn btn-primary w-100">Rejoindre l'activité</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="module">
+		import {initMap} from '/we-meet/assets/js/map.js';
+import {initModalMap} from '/we-meet/assets/js/modal-map.js';
+
+function loadGoogleMaps() {
+return new Promise((resolve) => {
+if (window.google && window.google.maps) {
+resolve();
+} else {
+const script = document.createElement('script');
+script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCOpwx5ojbAn5ysXe5aTEU40ygMHG_kfwU';
+script.async = true;
+script.defer = true;
+script.onload = () => resolve();
+document.head.appendChild(script);
+}
+});
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+await loadGoogleMaps();
+initMap({{ rooms|json_encode|raw }});
+initModalMap('createRoomModal', 'modal-map', 'room_latitude', 'room_longitude');
+});
+	</script>
+
+	<style>
+		.btn-floating {
+			position: fixed;
+			bottom: 30px;
+			right: 30px;
+			width: 60px;
+			height: 60px;
+			border-radius: 50%;
+			background-color: #007bff;
+			color: white;
+			border: none;
+			font-size: 24px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			z-index: 1000;
+		}
+	</style>
 {% endblock %}
