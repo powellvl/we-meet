@@ -29,3 +29,7 @@ section > .heading {
 section:nth-of-type(n + 2) {
   margin-top: 2.5rem;
 }
+
+/* * {
+  font-size: 3rem !important;
+} */

@@ -1,7 +1,126 @@
-#modalRoomParticipants > div {
-  transition: all 0.2s ease-in-out;
+/* === PAGE HOME MAP STYLE === */
+
+/* === Map === */
+#map {
+  height: calc(95vh - 120px);
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
 }
 
-#modalRoomParticipants > div:hover {
-  transform: scale(1.01);
+/* === Floating Button === */
+.btn-floating {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--color-purple);
+  color: white;
+  border: none;
+  font-size: 32px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+  transition: background-color 0.3s ease;
+}
+
+.btn-floating:hover {
+  background-color: rgb(96, 20, 159);
+}
+
+/* === Modale Création / Info === */
+.modal-content {
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  border-bottom: none;
+  background-color: #f8f9fa;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.modal-body {
+  padding: 25px;
+}
+
+.modal-footer {
+  border-top: none;
+  padding: 20px;
+}
+
+/* === Participants List === */
+#modalRoomParticipants div {
+  border-radius: 10px;
+  background: #f1f1f1;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* === Join Button === */
+#joinRoomLink {
+  padding: 12px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.d-flex {
+  display: flex;
+  gap: 20px;
+  margin: 20px;
+}
+
+/* === Sidebar === */
+#room-sidebar {
+  width: 300px;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  height: calc(95vh - 40px);
+  overflow-y: auto;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+#room-sidebar h4 {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+}
+
+.filters select,
+.filters input {
+  font-size: 14px;
+}
+
+/* === Room cards === */
+.room-card {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.room-card:hover {
+  background-color: #ececec;
+}
+
+/* === Map container adjusted === */
+#map-container {
+  flex-grow: 1;
+}
+
+#map {
+  height: calc(95vh - 40px);
+  width: 100%;
+  border-radius: 12px;
 }

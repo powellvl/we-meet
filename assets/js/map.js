@@ -63,11 +63,16 @@ export function initMap(rooms) {
 
       // Si user déjà inscrit ou créateur → désactiver bouton
       const joinBtn = document.getElementById("joinRoomLink");
-      const isCurrentUser = room.currentUserId;
-      const isCreator = room.creatorId === isCurrentUser;
+      const currentUserId = window.currentUserId;
+      const isCreator = room.creatorId === currentUserId;
       const alreadyJoined = room.participants.some(
-        (p) => p.id === isCurrentUser
+        (p) => p.id === currentUserId
       );
+
+      // Vérification de debug
+      console.log("Current user ID:", currentUserId);
+      console.log("Room creator ID:", room.creatorId);
+      console.log("Is creator:", isCreator);
 
       if (isCreator) {
         joinBtn.textContent = "Vous êtes l'organisateur";
@@ -84,7 +89,10 @@ export function initMap(rooms) {
       } else {
         joinBtn.textContent = "Rejoindre l'activité";
         joinBtn.className = "btn btn-primary w-100";
-        joinBtn.href = `/room/${room.id}/join`;
+
+        // Utiliser l'URL générée par Symfony
+        joinBtn.href = window.joinRoomUrlTemplate.replace("ROOM_ID", room.id);
+
         joinBtn.disabled = false;
       }
 

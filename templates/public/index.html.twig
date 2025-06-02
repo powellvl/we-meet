@@ -1,16 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PublicController!{% endblock %}
 
 {% block body %}
-<div class="welcome-container">
-  <div class="logo-container">
-    {% include 'components/_logo.html.twig' %}
-  </div>
-  <p class="welcome-text">Découvrez une nouvelle manière d’apprendre des langues, facilement et gratuitement !</p>
-  <div class="buttons-container">
-    <a href="{{ path('app_register') }}" class="button-register">INSCRIPTION</a>
-    <a href="{{ path('app_login') }}" class="button-login">CONNEXION</a>
-  </div>
-</div>
+	<div class="welcome-container">
+		<div class="logo-container">
+			{% include 'components/_logo.html.twig' %}
+		</div>
+		<p class="welcome-text">Découvrez une nouvelle manière d’apprendre des langues, facilement et gratuitement !</p>
+		<div class="buttons-container">
+			<a href="{{ path('app_register') }}" class="button-register">INSCRIPTION</a>
+			<a href="{{ path('app_login') }}" class="button-login">CONNEXION</a>
+		</div>
+	</div>
 {% endblock %}
