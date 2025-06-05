@@ -1,4 +1,24 @@
-.logo-header {
+header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-areas: ". logo link";
+  align-items: center;
+
+  .logo-header {
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-area: logo;
+  }
+  .link {
+    grid-area: link;
+    margin-left: auto;
+    width: 1.5rem;
+    aspect-ratio: 1;
+  }
+}
+
+.admin-header {
   width: 20%;
-  display: flex;
 }

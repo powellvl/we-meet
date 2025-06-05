@@ -2,7 +2,46 @@
 {% block body %}
 	{% include 'components/_header.html.twig' %}
 
-	<div id="map" style="height: calc(95vh - 120px); width: 100%;"></div>
+	<section class="map-bar">
+		<div id="map" style="height: calc(95vh - 120px); width: 100%;"></div>
+		<div
+			class="mt-0">
+			<!-- SIDEBAR -->
+			<aside id="room-sidebar">
+				<h4>Événements récents</h4>
+
+				<!-- Filtres -->
+				<div class="filters">
+					<input type="text" id="search-title" class="form-control mb-2" placeholder="Rechercher par titre..." value="{{ filter_title }}"/>
+
+					<select id="filter-language" class="form-select mb-2">
+						<option value="">Toutes les langues</option>
+						{% set languages = [] %}
+						{% for room in rooms %}
+							{% if room.language and room.language.name not in languages %}
+								{% set languages = languages|merge([room.language.name]) %}
+								<option value="{{ room.language.name }}" {% if room.language.name == filter_language %} selected {% endif %}>{{ room.language.name }}</option>
+							{% endif %}
+						{% endfor %}
+					</select>
+
+					<input type="date" id="filter-date" class="form-control mb-3" value="{{ filter_date }}"/>
+				</div>
+				<!-- Liste des rooms -->
+				<div id="room-list">
+					{% for room in rooms|slice(0, 10) %}
+						<div class="room-card" data-title="{{ room.title|lower }}" data-lang="{{ room.language.name|lower }}" data-date="{{ room.date|date('Y-m-d') }}">
+							<strong>{{ room.title }}</strong>
+							<p class="mb-1">
+								<small>{{ room.date|date('d/m/Y H:i') }}</small>
+							</p>
+							<span class="badge bg-secondary">{{ room.language.name ?? 'Langue inconnue' }}</span>
+						</div>
+					{% endfor %}
+				</div>
+			</aside>
+		</div>
+	</section>
 
 	<!-- Bouton flottant -->
 	{% if is_granted('ROLE_PROFESSOR', 'ROLE_ADMIN') %}
@@ -70,50 +109,8 @@
 		</div>
 	</div>
 
-	<div
-		class="d-flex">
-		<!-- SIDEBAR -->
-		<aside id="room-sidebar">
-			<h4>Événements récents</h4>
 
-			<!-- Filtres -->
-			<div class="filters">
-				<input type="text" id="search-title" class="form-control mb-2" placeholder="Rechercher par titre..." value="{{ filter_title }}"/>
-
-				<select id="filter-language" class="form-select mb-2">
-					<option value="">Toutes les langues</option>
-					{% set languages = [] %}
-					{% for room in rooms %}
-						{% if room.language and room.language.name not in languages %}
-							{% set languages = languages|merge([room.language.name]) %}
-							<option value="{{ room.language.name }}" {% if room.language.name == filter_language %} selected {% endif %}>{{ room.language.name }}</option>
-						{% endif %}
-					{% endfor %}
-				</select>
-
-				<input type="date" id="filter-date" class="form-control mb-3" value="{{ filter_date }}"/>
-			</div>
-
-			<!-- Liste des rooms -->
-			<div id="room-list">
-				{% for room in rooms|slice(0, 10) %}
-					<div class="room-card" data-title="{{ room.title|lower }}" data-lang="{{ room.language.name|lower }}" data-date="{{ room.date|date('Y-m-d') }}">
-						<strong>{{ room.title }}</strong>
-						<p class="mb-1">
-							<small>{{ room.date|date('d/m/Y H:i') }}</small>
-						</p>
-						<span class="badge bg-secondary">{{ room.language.name ?? 'Langue inconnue' }}</span>
-					</div>
-				{% endfor %}
-			</div>
-		</aside>
-
-		<!-- MAP -->
-		<div id="map-container">
-			<div id="map"></div>
-		</div>
-	</div>
-
+	<!-- Script pour charger les modules et initialiser la carte -->
 	<script type="module">
 		import {initMap} from '{{ asset('js/map.js') }}';
 import {initModalMap} from '{{ asset('js/modal-map.js') }}';
@@ -137,13 +134,44 @@ document.head.appendChild(script);
 });
 }
 
+function waitForMapContainer() {
+return new Promise((resolve) => {
+const checkContainer = () => {
+const container = document.getElementById('map');
+if (container && container.offsetWidth > 0 && container.offsetHeight > 0) {
+resolve();
+} else {
+setTimeout(checkContainer, 100);
+}
+};
+checkContainer();
+});
+}
 
-document.addEventListener('DOMContentLoaded', async () => {
+// Fonction principale d'initialisation
+async function initializeMap() {
+console.log('Initializing map...');
+await waitForMapContainer();
 await loadGoogleMaps();
 initMap({{ rooms|json_encode|raw }});
 initModalMap('createRoomModal', 'modal-map', 'room_latitude', 'room_longitude');
-});
+console.log('Map initialization complete');
+}
+
+// Au chargement du DOM
+document.addEventListener('DOMContentLoaded', initializeMap);
+
+// Vérifiez si nous venons de nous connecter
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has('post_login')) {
+console.log('Post-login detected, forcing map initialization');
+// Supprimez le paramètre de l'URL
+const newUrl = window.location.pathname;
+window.history.replaceState({}, document.title, newUrl);
+
+// Force l'initialisation après un délai
+setTimeout(initializeMap, 500);
+}
 	</script>
 
-	{% include 'components/_footer.html.twig' %}
 {% endblock %}

@@ -3,8 +3,8 @@ export function initModalMap(modalId, mapId, latFieldId, lngFieldId) {
 
   modalEl.addEventListener("shown.bs.modal", () => {
     const map = new google.maps.Map(document.getElementById(mapId), {
-      zoom: 6,
-      center: { lat: 46.603354, lng: 1.888334 }, // France par défaut
+      zoom: 12,
+      center: { lat: 44.837789, lng: -0.57918 }, // Bordeaux
     });
 
     let marker = null;

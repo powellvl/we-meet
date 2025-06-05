@@ -1,19 +1,25 @@
 /* === PAGE HOME MAP STYLE === */
 
+.map-bar {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 1.5rem;
+}
+
 /* === Map === */
 #map {
   height: calc(95vh - 120px);
   width: 100%;
   border-radius: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  margin-top: 10px;
 }
 
 /* === Floating Button === */
 .btn-floating {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
+  position: absolute;
+  bottom: 60px;
+  right: 360px;
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -38,6 +44,7 @@
 .modal-content {
   border-radius: 20px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  color: black;
 }
 
 .modal-header {
@@ -81,13 +88,14 @@
 
 /* === Sidebar === */
 #room-sidebar {
-  width: 300px;
   background-color: #fff;
   border-radius: 12px;
   padding: 20px;
   height: calc(95vh - 40px);
   overflow-y: auto;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  color: black;
+  overflow-y: auto;
 }
 
 #room-sidebar h4 {
@@ -108,6 +116,7 @@
   margin-bottom: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
+  color: black;
 }
 
 .room-card:hover {
@@ -121,6 +130,14 @@
 
 #map {
   height: calc(95vh - 40px);
+  min-height: 600px;
   width: 100%;
   border-radius: 12px;
+  display: block !important; /* Force l'affichage */
+  opacity: 1 !important;
+}
+
+.room-list {
+  overflow-y: scroll;
+  max-height: 60vh;
 }
