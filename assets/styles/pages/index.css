@@ -3,7 +3,6 @@
 @import url("_signin.css");
 @import url("_first.css");
 @import url("_home.css");
-
-/* * {
-  background: green;
-} */
+@import url("_profile.css");
+@import url("_admin.css");
+@import url("_404.css");
