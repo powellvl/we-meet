@@ -30,7 +30,7 @@
 				<!-- Liste des rooms -->
 				<div id="room-list">
 					{% for room in rooms|slice(0, 10) %}
-						<div class="room-card" data-title="{{ room.title|lower }}" data-lang="{{ room.language.name|lower }}" data-date="{{ room.date|date('Y-m-d') }}">
+						<div class="room-card" data-title="{{ room.title|lower }}" data-lang="{{ room.language.name|lower }}" data-date="{{ room.date|date('Y-m-d') }}" data-id="{{ room.id }}">
 							<strong>{{ room.title }}</strong>
 							<p class="mb-1">
 								<small>{{ room.date|date('d/m/Y H:i') }}</small>
@@ -78,10 +78,17 @@
 			<div class="modal-content shadow rounded-4">
 				<div class="modal-header bg-light border-bottom-0">
 					<div class="d-flex align-items-center gap-3">
-						<span id="modalRoomEmoji" style="font-size: 2rem;"></span>
+						
 						<div>
 							<h5 class="modal-title mb-0" id="modalRoomTitle"></h5>
-							<small class="text-muted" id="modalRoomLanguage"></small>
+							<div class="creator-info">
+							<p>Créer par</p><p id="modalRoomCreator"></p>
+							</div>
+							<div class="language-info">
+								<p>Language : </p>
+								<span id="modalRoomEmoji" style="font-size: 2rem;"></span>
+								<small class="text-muted" id="modalRoomLanguage"></small>
+							</div>
 						</div>
 					</div>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>

@@ -52,6 +52,7 @@
   background-color: #f8f9fa;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+  align-items: start;
 }
 
 .modal-body {
@@ -61,6 +62,23 @@
 .modal-footer {
   border-top: none;
   padding: 20px;
+}
+
+.creator-info {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.language-info {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.language-info p {
+  margin: 0;
+  font-weight: bold;
 }
 
 /* === Participants List === */

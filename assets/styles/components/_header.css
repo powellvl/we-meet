@@ -25,7 +25,7 @@ header {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  gap: 0.5rem;
+  gap: 2rem;
   margin-left: 300px;
 }
 
@@ -38,4 +38,31 @@ header {
   gap: 1ch;
   display: flex;
   align-items: center;
+}
+
+.link-user-header p {
+  margin: 0;
+}
+
+.link-user-header:hover p {
+  text-decoration: underline;
+}
+
+.btn-header {
+  display: inline-block;
+  background-color: var(--color-orange);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+  width: 100%;
+}
+
+.btn-header:hover {
+  background-color: rgb(221, 126, 25);
 }
