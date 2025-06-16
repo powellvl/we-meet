@@ -1,22 +1,54 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register
+{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+	<div class="register-container">
+		<a href="{{ path('app_public') }}">
+			<div class="register-logo">
+				<img src="{{ asset('images/logowemeet2.png')}}" alt="logo">
+			</div>
+		</a>
+		<h1 class="register-title">Création de mon compte</h1>
 
-    {{ form_errors(registrationForm) }}
+		{% if form_errors(registrationForm) %}
+			<div class="alert">
+				{{ form_errors(registrationForm) }}
+			</div>
+		{% endif %}
 
-    {{ form_start(registrationForm) }}
-    {{ form_row(registrationForm.firstname) }}
-    {{ form_row(registrationForm.lastname) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+		{{ form_start(registrationForm) }}
+		<div class="form-group">
+			{{ form_label(registrationForm.firstname, 'Ton prénom', {'label_attr': {'class': 'form-label'}}) }}
+			{{ form_widget(registrationForm.firstname, {'attr': {'class': 'form-control'}}) }}
+		</div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
-    <p>Already have an account ? <a href="{{ path('app_login') }}">Click Here</a></p>
+		<div class="form-group">
+			{{ form_label(registrationForm.lastname, 'Ton nom', {'label_attr': {'class': 'form-label'}}) }}
+			{{ form_widget(registrationForm.lastname, {'attr': {'class': 'form-control'}}) }}
+		</div>
+
+		<div class="form-group">
+			{{ form_label(registrationForm.email, 'Ton Email', {'label_attr': {'class': 'form-label'}}) }}
+			{{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+		</div>
+
+		<div class="form-group">
+			{{ form_label(registrationForm.plainPassword, 'Mot de passe', {'label_attr': {'class': 'form-label'}}) }}
+			{{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+		</div>
+
+		<div class="form-check">
+			{{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+			{{ form_label(registrationForm.agreeTerms, "J'accepte les conditions d'utilisations de We'Meet", {'label_attr': {'class': 'form-check-label'}}) }}
+		</div>
+
+		<button type="submit" class="btn">Rejoindre We'Meet</button>
+		{{ form_end(registrationForm) }}
+
+		<p class="login-link">Tu as déjà un compte ?
+			<a href="{{ path('app_login') }}">Clique ici !</a>
+		</p>
+	</div>
 {% endblock %}

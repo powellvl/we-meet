@@ -1,62 +1,59 @@
-{# filepath: /Applications/MAMP/htdocs/we_meet/templates/admin/layout.html.twig #}
+{# filepath: /Applications/MAMP/htdocs/we-meet/templates/admin/layout.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Administration - {{ parent() }}{% endblock %}
+{% block title %}Administration -
+	{{ parent() }}
+{% endblock %}
 
 {% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+	{{ parent() }}
+	{# CSS styles are managed via app.css #}
 {% endblock %}
 
 {% block body %}
-<div class="admin-container">
-    <div class="admin-sidebar">
-        <div class="admin-brand">
-            <h2>WeMeet Admin</h2>
-        </div>
-        <nav class="admin-nav">
-            <ul>
-                <li><a href="{{ path('app_admin_dashboard') }}" class="{{ app.request.get('_route') == 'app_admin_dashboard' ? 'active' : '' }}">
-                    <i class="fas fa-tachometer-alt"></i> Tableau de bord
-                </a></li>
-                
-                <li><a href="{{ path('app_user_index') }}" class="{{ app.request.get('_route') starts with 'app_admin_user' ? 'active' : '' }}">
-                    <i class="fas fa-users"></i> Utilisateurs
-                </a></li>
+	{% include 'components/_header.html.twig' %}
 
-                <li><a href="{{ path('admin_professor_pending') }}" class="{{ app.request.get('_route') == 'admin_professor_' ? 'active' : '' }}">
-                    <i class="fas fa-tachometer-alt"></i> Vérification
-                </a></li>
-                
-                <li><a href="{{ path('app_language_index') }}" class="{{ app.request.get('_route') starts with 'app_admin_language' ? 'active' : '' }}">
-                    <i class="fas fa-language"></i> Langues
-                </a></li>
-            </ul>
-        </nav>
-    </div>
-    
-    <div class="admin-content">
-        <header class="admin-header">
-            <div class="admin-header-title">
-                {% block admin_title %}Administration{% endblock %}
-            </div>
-            <div class="admin-header-user">
-                <span>{{ app.user.email }}</span>
-                <a href="{{ path('app_logout') }}" class="btn btn-sm btn-outline-danger">Déconnexion</a>
-            </div>
-        </header>
-        
-        <main class="admin-main">
-            {% for label, messages in app.flashes %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ label }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endfor %}
-            
-            {% block admin_content %}{% endblock %}
-        </main>
-    </div>
-</div>
+	<div class="admin-container">
+		<div class="admin-sidebar">
+			<div class="admin-brand">
+				<h2>WeMeet Admin</h2>
+			</div>
+			<nav class="admin-nav">
+				<ul>
+					<li><a href="{{path('app_admin_home')}}" class="{{app.request.get('_route') == 'app_admin_home' ? 'active' : ''}}"><i class="fas fa-tachometer-alt"></i><span>Tableau de bord</span></a></li>
+
+					<li><a href="{{path('app_user_index')}}" class="{{app.request.get('_route') is same as('app_user_index') or app.request.get('_route') starts with 'app_user_' ? 'active' : ''}}"><i class="fas fa-users"></i><span>Utilisateurs</span></a></li>
+
+					<li><a href="{{path('admin_professor_pending')}}" class="{{app.request.get('_route') starts with 'admin_professor_' ? 'active' : ''}}"><i class="fas fa-user-check"></i><span>Vérification</span></a></li>
+
+					<li><a href="{{path('app_language_index')}}" class="{{app.request.get('_route') starts with 'app_language_' ? 'active' : ''}}"><i class="fas fa-language"></i><span>Langues</span></a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<div class="admin-content">
+			<header class="admin-header">
+				<div class="admin-header-title">
+					{% block admin_title %}Administration
+					{% endblock %}
+				</div>
+				<div class="admin-header-user">
+					<span>{{ app.user.firstname }}</span>
+					<a href="{{ path('app_logout') }}" class="btn btn-sm btn-outline-danger">Déconnexion</a>
+				</div>
+			</header>
+
+			<main class="admin-main">
+				{% for label, messages in app.flashes %}
+					{% for message in messages %}
+						<div class="alert alert-{{ label }}">
+							{{ message }}
+						</div>
+					{% endfor %}
+				{% endfor %}
+
+				{% block admin_content %}{% endblock %}
+			</main>
+		</div>
+	</div>
 {% endblock %}

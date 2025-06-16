@@ -1,6 +1,8 @@
 <header>
 	<div class="logo-header">
-		{% include 'components/_logo.html.twig' %}
+		<a href="loader">
+			{% include 'components/_logo.html.twig' %}
+		</a>
 	</div>
 	<div class"admin-header">
 		{% if is_granted('ROLE_ADMIN') %}

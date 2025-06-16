@@ -1,17 +1,1 @@
-:root {
-  --fs-xxl: 3.5rem;
-
-  --t-fs-xl: 3rem;
-
-  --fs-l-plus: 2.5rem;
-  --fs-l: 2rem;
-  --fs-ml: 1.75rem;
-  --fs-m: 1.5rem;
-
-  --t-fs-ms: 2rem;
-  --t-fs-s: 2rem;
-  --t-fs-xs: 2rem;
-
-  --fs-text-plus: 1.125rem;
-  --fs-text: 1rem;
-}
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");

@@ -1,22 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Choix des langues{% endblock %}
+{% block title %}Choix des langues
+{% endblock %}
 
 {% block body %}
-    <h1>Étape 2 : Choisissez les langues que vous parlez</h1>
+	<h1>Étape 2 : Choisissez les langues que vous parlez</h1>
 
-    {{ form_start(form) }}
+	{{ form_start(form) }}
 
-    <div class="language-management-collection">
-        {% for languageForm in form.languageManagements %}
-            <div class="language-block" style="margin-bottom: 1rem;">
-                {{ form_row(languageForm.language) }}
-                {{ form_row(languageForm.isProfessor) }}
-            </div>
-        {% endfor %}
-    </div>
+	<div class="language-management-collection">
+		{% for languageForm in form.languageManagements %}
+			<div class="language-block" style="margin-bottom: 1rem;">
+				{{ form_row(languageForm.language) }}
+				{{ form_row(languageForm.isProfessor) }}
+			</div>
+		{% endfor %}
+	</div>
 
-    <button class="btn btn-primary">Valider et continuer</button>
+	<button class="btn btn-primary">Valider et continuer</button>
 
-    {{ form_end(form) }}
+	{{ form_end(form) }}
 {% endblock %}

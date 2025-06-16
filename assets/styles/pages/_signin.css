@@ -1,0 +1,123 @@
+/* Styles pour la page d'inscription */
+.register-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.register-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.register-logo img {
+  max-width: 100px;
+}
+
+.register-title {
+  text-align: center;
+  color: var(--color-purple);
+  margin-bottom: 30px;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form-check-input {
+  margin-right: 10px;
+}
+
+.form-check-label {
+  color: #2c3e50;
+}
+
+.btn {
+  display: inline-block;
+  background-color: var(--color-orange);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.btn:hover {
+  background-color: #c66810;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 20px;
+  color: #7f8c8d;
+}
+
+.login-link a {
+  color: var(--color-purple);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+.alert {
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+}
+
+/* Responsive design */
+@media (max-width: 576px) {
+  .register-container {
+    padding: 20px;
+    margin: 0 15px;
+  }
+
+  .btn {
+    padding: 10px 20px;
+  }
+}

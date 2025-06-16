@@ -7,3 +7,14 @@ controllers:
 app_loader:
   path: /loader
   controller: App\Controller\LoaderController::index
+
+# Routes pour l'administration
+app_admin:
+  resource: "../src/Controller/Admin/"
+  type: attribute
+  prefix: /admin
+
+# Route principale pour l'admin
+app_admin_home:
+  path: /admin
+  controller: App\Controller\Admin\AdminHomeController::index

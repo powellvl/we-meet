@@ -10,10 +10,9 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[IsGranted('ROLE_ADMIN')]
-class AdminDashboardController extends AbstractController
+class AdminHomeController extends AbstractController
 {
-    // Route temporairement désactivée pour éviter les boucles de redirection
-    // #[Route('/admin', name: 'app_admin_dashboard')]
+    #[Route('/admin', name: 'app_admin_home')]
     public function index(
         UserRepository $userRepository,
         LanguageRepository $languageRepository
