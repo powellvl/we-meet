@@ -1,0 +1,78 @@
+/* Styles pour les pages de profil utilisateur */
+.avatar-placeholder {
+  width: 120px;
+  height: 120px;
+  background-color: var(--color-purple);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 0 auto;
+}
+
+.profile-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.profile-avatar {
+  margin-right: 2rem;
+}
+
+.profile-info h1 {
+  color: var(--color-purple);
+  margin-bottom: 0.5rem;
+}
+
+.profile-email {
+  color: #6c757d;
+  margin-bottom: 1rem;
+}
+
+.profile-badges {
+  margin-bottom: 1rem;
+}
+
+.profile-actions {
+  margin-top: 1rem;
+}
+
+.profile-section {
+  margin-bottom: 2rem;
+}
+
+.profile-section-title {
+  color: var(--color-purple);
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--color-orange);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-avatar {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+}

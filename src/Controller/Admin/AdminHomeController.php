@@ -12,7 +12,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_ADMIN')]
 class AdminHomeController extends AbstractController
 {
-    #[Route('/admin', name: 'app_admin_home')]
+    #[Route('/', name: 'app_admin_home')]
     public function index(
         UserRepository $userRepository,
         LanguageRepository $languageRepository

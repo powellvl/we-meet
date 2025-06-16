@@ -19,6 +19,23 @@ header {
   }
 }
 
-.admin-header {
-  width: 20%;
+.user-header {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  gap: 0.5rem;
+  margin-left: 300px;
+}
+
+.user-avatar {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.link-user-header {
+  gap: 1ch;
+  display: flex;
+  align-items: center;
 }

@@ -1,6 +1,6 @@
 <header>
 	<div class="logo-header">
-		<a href="loader">
+		<a href="{{ path('app_loader') }}">
 			{% include 'components/_logo.html.twig' %}
 		</a>
 	</div>
@@ -16,9 +16,18 @@
 				</svg>
 			</a>
 		{% endif %}
-
 	</div>
-	<a href="/profile" class="link">
-		<i class="bi bi-person-circle fs-4 text-white"></i>
-	</a>
+
+	<div class="user-header">
+		<div class="user-avatar">
+			<a href="{{ path('app_user_show', {'id': app.user.id}) }}" class="link-user-header" >
+				{{ app.user.firstname }}
+					<i class='bx bx-user' style='color:#ffffff'  ></i>
+			</a>
+		</div>
+		<div>
+			<a href="{{ path('app_logout') }}" class="btn btn-sm btn-outline-danger">Déconnexion</a>
+		</div>
+	</div>
+
 </header>

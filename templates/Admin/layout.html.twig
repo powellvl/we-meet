@@ -22,7 +22,7 @@
 				<ul>
 					<li><a href="{{path('app_admin_home')}}" class="{{app.request.get('_route') == 'app_admin_home' ? 'active' : ''}}"><i class="fas fa-tachometer-alt"></i><span>Tableau de bord</span></a></li>
 
-					<li><a href="{{path('app_user_index')}}" class="{{app.request.get('_route') is same as('app_user_index') or app.request.get('_route') starts with 'app_user_' ? 'active' : ''}}"><i class="fas fa-users"></i><span>Utilisateurs</span></a></li>
+					<li><a href="{{path('app_admin_user_index')}}" class="{{app.request.get('_route') starts with 'app_admin_user_' ? 'active' : ''}}"><i class="fas fa-users"></i><span>Utilisateurs</span></a></li>
 
 					<li><a href="{{path('admin_professor_pending')}}" class="{{app.request.get('_route') starts with 'admin_professor_' ? 'active' : ''}}"><i class="fas fa-user-check"></i><span>Vérification</span></a></li>
 
@@ -36,10 +36,6 @@
 				<div class="admin-header-title">
 					{% block admin_title %}Administration
 					{% endblock %}
-				</div>
-				<div class="admin-header-user">
-					<span>{{ app.user.firstname }}</span>
-					<a href="{{ path('app_logout') }}" class="btn btn-sm btn-outline-danger">Déconnexion</a>
 				</div>
 			</header>
 

@@ -12,11 +12,11 @@
 
 /* Reset et base */
 .admin-container {
+  position: relative;
   width: 100%;
   margin-top: 50px;
   display: flex;
   min-height: 100vh;
-  font-family: "Roboto", "Segoe UI", sans-serif;
 }
 
 /* Sidebar styles */
@@ -24,7 +24,8 @@
   width: var(--admin-sidebar-width);
   background-color: var(--admin-secondary-color);
   color: white;
-  position: fixed;
+  position: sticky;
+  top: 0;
   height: 100%;
   overflow-y: auto;
   z-index: 10;
@@ -88,7 +89,6 @@
 /* Content area */
 .admin-content {
   flex: 1;
-  margin-left: var(--admin-sidebar-width);
   background-color: var(--admin-light-bg);
 }
 
@@ -260,9 +260,5 @@
   .admin-nav i {
     font-size: 1.2rem;
     margin-right: 0;
-  }
-
-  .admin-content {
-    margin-left: 60px;
   }
 }

@@ -13,8 +13,4 @@ app_admin:
   resource: "../src/Controller/Admin/"
   type: attribute
   prefix: /admin
-
-# Route principale pour l'admin
-app_admin_home:
-  path: /admin
-  controller: App\Controller\Admin\AdminHomeController::index
+# Route principale pour l'admin est maintenant définie directement dans le contrôleur
