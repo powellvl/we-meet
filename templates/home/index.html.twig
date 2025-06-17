@@ -8,24 +8,26 @@
 			class="mt-0">
 			<!-- SIDEBAR -->
 			<aside id="room-sidebar">
-				<h4>Événements récents</h4>
+				<div>
+					<h4>Événements récents</h4>
 
-				<!-- Filtres -->
-				<div class="filters">
-					<input type="text" id="search-title" class="form-control mb-2" placeholder="Rechercher par titre..." value="{{ filter_title }}"/>
+					<!-- Filtres -->
+					<div class="filters">
+						<input type="text" id="search-title" class="form-control mb-2" placeholder="Rechercher par titre..." value="{{ filter_title }}"/>
 
-					<select id="filter-language" class="form-select mb-2">
-						<option value="">Toutes les langues</option>
-						{% set languages = [] %}
-						{% for room in rooms %}
-							{% if room.language and room.language.name not in languages %}
-								{% set languages = languages|merge([room.language.name]) %}
-								<option value="{{ room.language.name }}" {% if room.language.name == filter_language %} selected {% endif %}>{{ room.language.name }}</option>
-							{% endif %}
-						{% endfor %}
-					</select>
+						<select id="filter-language" class="form-select mb-2">
+							<option value="">Toutes les langues</option>
+							{% set languages = [] %}
+							{% for room in rooms %}
+								{% if room.language and room.language.name not in languages %}
+									{% set languages = languages|merge([room.language.name]) %}
+									<option value="{{ room.language.name }}" {% if room.language.name == filter_language %} selected {% endif %}>{{ room.language.name }}</option>
+								{% endif %}
+							{% endfor %}
+						</select>
 
-					<input type="date" id="filter-date" class="form-control mb-3" value="{{ filter_date }}"/>
+						<input type="date" id="filter-date" class="form-control mb-3" value="{{ filter_date }}"/>
+					</div>
 				</div>
 				<!-- Liste des rooms -->
 				<div id="room-list">
@@ -65,7 +67,11 @@
 					{{ form_row(form.language) }}
 					{{ form_row(form.latitude) }}
 					{{ form_row(form.longitude) }}
-					<div id="modal-map" style="height: 300px;"></div>
+					<div class="mb-3">
+						<label class="form-label">Emplacement</label>
+						<div id="modal-map" style="height: 300px;"></div>
+						<small class="form-text text-muted">Cliquez sur la carte pour choisir l'emplacement de l'événement</small>
+					</div>
 					<button class="btn btn-success mt-3">Créer</button>
 					{{ form_end(form) }}
 				</div>
@@ -106,7 +112,8 @@
 
 					<div>
 						<strong>Participants :</strong>
-						<div id="modalRoomParticipants" class="mt-2 d-flex flex-column gap-2"></div>
+						<div id="modalRoomParticipants" class="mt-2 d-flex flex-column gap-2">
+						</div>
 					</div>
 				</div>
 				<div class="modal-footer border-top-0">

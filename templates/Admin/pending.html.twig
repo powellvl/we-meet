@@ -9,7 +9,6 @@
             <tr>
                 <th>Nom</th>
                 <th>Email</th>
-                <th>Voir réponses</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -19,11 +18,7 @@
                 <td>{{ user.firstname }} {{ user.lastname }}</td>
                 <td>{{ user.email }}</td>
                 <td>
-                    <a href="{{ path('admin_professor_answers', {id: user.id}) }}">Voir réponses</a>
-                </td>
-                <td>
-                    <a href="{{ path('admin_professor_accept', {id: user.id}) }}" class="btn btn-success">Accepter</a>
-                    <a href="{{ path('admin_professor_reject', {id: user.id}) }}" class="btn btn-danger">Refuser</a>
+                    <a href="{{ path('admin_professor_answers', {id: user.id}) }}" class="btn btn-info">Voir</a>
                 </td>
             </tr>
         {% endfor %}

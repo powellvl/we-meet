@@ -40,13 +40,7 @@
 			</header>
 
 			<main class="admin-main">
-				{% for label, messages in app.flashes %}
-					{% for message in messages %}
-						<div class="alert alert-{{ label }}">
-							{{ message }}
-						</div>
-					{% endfor %}
-				{% endfor %}
+				
 
 				{% block admin_content %}{% endblock %}
 			</main>

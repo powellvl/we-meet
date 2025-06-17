@@ -3,11 +3,7 @@
 {% block admin_title %}Liste des utilisateurs{% endblock %}
 
 {% block admin_content %}
-    <div class="admin-actions mb-4">
-        <a href="{{ path('app_admin_user_new') }}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Créer Utilisateur
-        </a>
-    </div>
+    
 
     <div class="card">
         <div class="card-header">
@@ -40,14 +36,14 @@
                         <td>
                             <div class="btn-group btn-group-sm">
                                 <a href="{{ path('app_admin_user_show', {'id': user.id}) }}" class="btn btn-info" title="Détails">
-                                    <i class="fas fa-eye"></i>
+                                    <i class='bx  bx-eye-alt'  ></i> 
                                 </a>
                                 <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}" class="btn btn-warning" title="Modifier">
-                                    <i class="fas fa-edit"></i>
+                                    <i class='bx  bx-cog'  ></i> 
                                 </a>
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" 
                                         data-bs-target="#deleteModal{{ user.id }}" title="Supprimer">
-                                    <i class="fas fa-trash"></i>
+                                    <i class='bx  bx-trash-alt'  ></i> 
                                 </button>
                             </div>
 
@@ -82,5 +78,10 @@
                 </tbody>
             </table>
         </div>
+        <div class="admin-actions mb-4">
+        <a href="{{ path('app_admin_user_new') }}" class="btn btn-create">
+            <i class="fas fa-plus"></i> Créer Utilisateur
+        </a>
+    </div>
     </div>
 {% endblock %}

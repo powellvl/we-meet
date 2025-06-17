@@ -11,7 +11,7 @@
 				<div class="card bg-primary text-white mb-4">
 					<div class="card-body">
 						<h5 class="card-title">Utilisateurs</h5>
-						<h2>{{ stats.totalUsers }}</h2>
+						<h2 class="admin-number">{{ stats.totalUsers }}</h2>
 					</div>
 					<div class="card-footer d-flex align-items-center justify-content-between">
 						<a class="small text-white stretched-link" href="{{ path('app_admin_user_index') }}">Voir les détails</a>
@@ -41,7 +41,7 @@
 				<div class="card bg-info text-white mb-4">
 					<div class="card-body">
 						<h5 class="card-title">Langues disponibles</h5>
-						<h2>{{ stats.totalLanguages }}</h2>
+						<h2 class="admin-number">{{ stats.totalLanguages }}</h2>
 					</div>
 					<div class="card-footer d-flex align-items-center justify-content-between">
 						<a class="small text-white stretched-link" href="{{ path('app_language_index') }}">Voir les détails</a>

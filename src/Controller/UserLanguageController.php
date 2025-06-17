@@ -53,7 +53,7 @@ class UserLanguageController extends AbstractController
 
             if ($hasAtLeastOneSelection) {
                 $em->flush();
-                $this->addFlash('success', 'Langue(s) enregistrée(s) avec succès !');
+                
 
                 if ($wantsToBeProfessor) {
                     // ➡️ Redirection vers le questionnaire

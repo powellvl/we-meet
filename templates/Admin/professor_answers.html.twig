@@ -49,15 +49,13 @@
         </div>
         <div class="card-footer">
             <div class="d-flex justify-content-between">
-                <div>
                     <a href="{{ path('admin_professor_accept', {id: user.id}) }}" class="btn btn-success">
                         <i class="fas fa-check"></i> Approuver comme professeur
                     </a>
-                    <a href="{{ path('admin_professor_reject', {id: user.id}) }}" class="btn btn-danger ms-2">
+                    <a href="{{ path('admin_professor_reject', {id: user.id}) }}" class="btn btn-danger">
                         <i class="fas fa-times"></i> Rejeter
                     </a>
-                </div>
-                <a href="{{ path('admin_professor_pending') }}" class="btn btn-outline-secondary">
+                <a href="{{ path('admin_professor_pending') }}" class="btn btn-annuler">
                     Annuler
                 </a>
             </div>

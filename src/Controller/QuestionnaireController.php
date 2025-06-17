@@ -63,11 +63,19 @@ class QuestionnaireController extends AbstractController
                 $em->persist($answer);
             }
 
+            // Ajouter le rôle ROLE_PENDING_PROFESSOR pour être listé dans l'administration
+            $roles = $user->getRoles();
+            if (!in_array('ROLE_PENDING_PROFESSOR', $roles)) {
+                $roles[] = 'ROLE_PENDING_PROFESSOR';
+                $user->setRoles($roles);
+            }
+            
             $em->flush();
 
-            $this->addFlash('success', 'Merci pour vos réponses !');
+            $this->addFlash('success', 'Merci pour vos réponses ! Votre demande pour devenir professeur est en cours d\'examen.');
+            $this->addFlash('success', 'Vous pouvez connecter en attendant votre vérification, vous recevrez une confirmation par email.');
 
-            return $this->redirectToRoute('app_home'); // ou page "en attente de validation"
+            return $this->redirectToRoute('app_home');
         }
 
         // 5. Afficher le formulaire

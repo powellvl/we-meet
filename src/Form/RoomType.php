@@ -20,13 +20,23 @@ class RoomType extends AbstractType
         $builder
             ->add('title', TextType::class)
             ->add('description', TextareaType::class)
-            ->add('date', DateTimeType::class)
+            ->add('date', DateTimeType::class, [
+                'widget' => 'single_text',
+                'html5' => true,
+                'attr' => ['class' => 'form-control'],
+            ])
             ->add('language', EntityType::class, [
                 'class' => Language::class,
                 'choice_label' => 'name',
             ])
-            ->add('latitude', NumberType::class)
-            ->add('longitude', NumberType::class)
+            ->add('latitude', NumberType::class, [
+                'attr' => ['style' => 'display: none;', 'id' => 'room_latitude'],
+                'label' => false,
+            ])
+            ->add('longitude', NumberType::class, [
+                'attr' => ['style' => 'display: none;', 'id' => 'room_longitude'],
+                'label' => false,
+            ])
         ;
     }
 

@@ -4,6 +4,13 @@
 {% endblock %}
 
 {% block body %}
+{% for label, messages in app.flashes %}
+					{% for message in messages %}
+						<div class="alert alert-{{ label }}">
+							{{ message }}
+						</div>
+					{% endfor %}
+{% endfor %}
 	<div class="login-container">
 		<a href="{{ path('app_public') }}">
 			<div class="login-logo">
@@ -35,6 +42,15 @@
 				<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 			</div>
 
+			{# 
+			  Le token CSRF (Cross-Site Request Forgery) est un mécanisme de sécurité essentiel
+			  qui protège le formulaire contre les attaques de type "Cross-Site Request Forgery".
+			  
+			  - Fonctionnement : Symfony génère un token unique pour cette session
+			  - Ce token est validé côté serveur lors de la soumission du formulaire
+			  - Sans ce token, un site malveillant pourrait soumettre un formulaire à votre insu
+			  - 'authenticate' est l'identifiant qui permet de distinguer ce token des autres dans l'application
+			#}
 			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
 			<div class="form-check">
@@ -42,7 +58,7 @@
 				<label for="_remember_me" class="form-check-label">Se souvenir de moi</label>
 			</div>
 
-			<button class="btn" type="submit">
+			<button class="btn button-login" type="submit">
 				Me connecter
 			</button>
 		</form>

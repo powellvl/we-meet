@@ -1,25 +1,67 @@
-.button-register {
+.btn {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
   background-color: var(--color-orange);
-  border: none;
   color: white;
-  border-radius: 3px;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-  font-weight: 600;
+  transition: background-color 0.3s;
+  width: 50%;
+  margin-top: 10px;
+}
+
+.btn:hover {
+  background-color: #c66810;
+}
+
+.button-register1 {
+  width: 100%;
+  background-color: var(--color-orange);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.button-register1:hover {
+  background-color: #c66810;
+}
+
+.button-login1 {
+  width: 100%;
+  background-color: var(--color-orange);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.button-login1:hover {
+  background-color: #c66810;
+}
+
+.button-register {
+  width: 100%;
 }
 .button-register:hover {
-  background-color: var(--color-white);
-  color: var(--color-orange);
+  background-color: rgb(212, 143, 15);
+  color: white;
 }
 .button-register:active {
-  background-color: var(--color-white);
-  color: var(--color-orange);
+  background-color: rgb(212, 143, 15);
+  color: white;
   transform: translateY(4px);
 }
 .button-register:focus {
@@ -27,29 +69,74 @@
 }
 
 .button-login {
-  border-radius: 3px;
-  background-color: var(--color-orange);
-  color: var(--color-white);
-  border: none;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-  font-weight: 600;
+  width: 100%;
 }
 .button-login:hover {
-  background-color: var(--color-white);
-  color: var(--color-orange);
+  background-color: rgb(247, 156, 37);
+  color: white;
 }
 .button-login:active {
-  background-color: var(--color-white);
+  background-color: rgb(212, 143, 15);
   color: var(--color-orange);
   transform: translateY(4px);
 }
 .button-login:focus {
   outline: none;
+}
+
+.btn {
+  padding: 20px;
+}
+
+.btn-info {
+  background-color: rgb(64, 64, 241);
+}
+
+.btn-info:hover {
+  background-color: rgb(48, 48, 192);
+  color: white;
+}
+
+.btn-warning {
+  background-color: rgb(20, 186, 84);
+}
+.btn-warning:hover {
+  background-color: rgb(12, 109, 50);
+  color: white;
+}
+
+.btn-danger {
+  background-color: rgb(235, 43, 43);
+}
+.btn-danger:hover {
+  background-color: rgb(204, 0, 0);
+}
+
+.btn-secondary {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-success {
+  background-color: rgb(20, 186, 84);
+}
+.btn-success:hover {
+  background-color: rgb(12, 109, 50);
+  color: white;
+}
+
+.btn-annuler {
+  height: 20%;
+  width: 50%;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-create {
+  background-color: green;
+  width: 100%;
 }
