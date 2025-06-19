@@ -23,15 +23,11 @@ class UserLanguageController extends AbstractController
         LanguageRepository $languageRepository
     ): Response {
         // Pré-remplir les langues si vide
-        if ($user->getLanguageManagements()->isEmpty()) {
-            $languages = $languageRepository->findAll();
-            foreach ($languages as $language) {
-                $lm = new LanguageManagement();
-                $lm->setUser($user);
-                $lm->setLanguage($language);
-                $user->addLanguageManagement($lm);
-            }
-        }
+    if ($user->getLanguageManagements()->isEmpty()) {
+    $lm = new LanguageManagement();
+    $lm->setUser($user);
+    $user->addLanguageManagement($lm); // Un seul bloc vide
+    }
 
         $form = $this->createForm(LanguageManagementCollectionType::class, $user);
         $form->handleRequest($request);
@@ -59,8 +55,8 @@ class UserLanguageController extends AbstractController
                     // ➡️ Redirection vers le questionnaire
                     return $this->redirectToRoute('app_register_questionnaire', ['id' => $user->getId()]);
                 } else {
-                    // ➡️ Sinon vers accueil ou dashboard
-                    return $this->redirectToRoute('app_home'); // adapte le nom de ta route ici
+                    // ➡️ Redirection vers le loader pour tous les utilisateurs
+                    return $this->redirectToRoute('app_loader');
                 }
             } else {
                 $this->addFlash('warning', 'Veuillez choisir au moins une langue.');

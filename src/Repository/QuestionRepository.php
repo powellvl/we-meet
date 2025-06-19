@@ -41,16 +41,25 @@ class QuestionRepository extends ServiceEntityRepository
     //        ;
     //    }
 
+    /**
+     * Trouve les questions pour les langages spécifiés
+     * 
+     * Cette méthode récupère toutes les questions qui n'ont pas de langage défini
+     * ou qui correspondent à l'un des langages fournis dans le tableau.
+     * 
+     * @param array $languages Tableau des langages à rechercher
+     * @return array Tableau d'objets Question correspondant aux critères
+     */
     public function findQuestionsForLanguages(array $languages): array
-{
-    $qb = $this->createQueryBuilder('q')
-        ->where('q.language IS NULL');
+    {
+        $qb = $this->createQueryBuilder('q')
+            ->where('q.language IS NULL');
 
-    if (!empty($languages)) {
-        $qb->orWhere('q.language IN (:langs)')
-        ->setParameter('langs', $languages);
+        if (!empty($languages)) {
+            $qb->orWhere('q.language IN (:langs)')
+            ->setParameter('langs', $languages);
+        }
+
+        return $qb->getQuery()->getResult();
     }
-
-    return $qb->getQuery()->getResult();
-}
 }

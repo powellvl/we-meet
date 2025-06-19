@@ -1,0 +1,99 @@
+/* Style pour le questionnaire d'évaluation */
+
+h1 {
+  margin-bottom: 2rem;
+  color: #2c3e50;
+  text-align: center;
+  font-weight: 700;
+}
+
+.question-container {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  transition: transform 0.3s ease;
+}
+
+.question-container:hover {
+  transform: translateY(-5px);
+}
+
+.question-label {
+  font-weight: 600;
+  color: #3498db;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  border-bottom: 2px solid #ecf0f1;
+  padding-bottom: 0.5rem;
+}
+
+.answer-field {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+/* Style des boutons radio et checkbox */
+.form-check {
+  margin-bottom: 0.5rem;
+  padding-left: 2rem;
+}
+
+/* Style du bouton d'envoi */
+.btn-success {
+  background-color: #3498db;
+  border-color: #3498db;
+  border-radius: 30px;
+  padding: 10px 30px;
+  font-weight: 600;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+  background-color: #2980b9;
+  border-color: #2980b9;
+  transform: scale(1.05);
+}
+
+/* Animation des éléments du formulaire */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mb-3 {
+  animation: fadeIn 0.5s ease forwards;
+  animation-delay: calc(var(--animation-order) * 0.1s);
+  opacity: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .question-container {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+}
+
+.btn-form-registration {
+  width: 100%;
+}
+
+.questionnaire-description {
+  font-size: 1.1rem;
+  color: #f5f5f5;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  margin-bottom: 100px;
+}

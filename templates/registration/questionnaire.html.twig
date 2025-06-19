@@ -1,16 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Questionnaire d'évaluation{% endblock %}
+{% block title %}Questionnaire d'évaluation
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('app') }}
+{% endblock %}
 
 {% block body %}
-    <h1>Questionnaire d'évaluation</h1>
+	<div class="container py-5">
+		<h1>Questionnaire d'évaluation</h1>
+		<p class="questionnaire-description">Veillez à répondre à ce questionnaire de façons sérieuse et professionnel, 
+																	votre réponse sera analysé pour confirmer ou non votre capacité à être professeur</p>
 
-    {{ form_start(form) }}
-    {% for field in form %}
-        <div class="mb-3">
-            {{ form_row(field) }}
-        </div>
-    {% endfor %}
-    <button class="btn btn-success">Envoyer mes réponses</button>
-    {{ form_end(form) }}
+		{{ form_start(form, {'attr': {'class': 'questionnaire-form'}}) }}
+		{# On rend le CSRF token ici mais de manière cachée #}
+		{{ form_row(form._token, {'attr': {'class': 'd-none'}, 'row_attr': {'class': 'd-none'}}) }}
+
+		{% for field in form %}
+			{% if field.vars.name != '_token' %}
+				<div class="question-container mb-4" style="--animation-order: {{ loop.index }}">
+					<div class="question-label">{{ form_label(field) }}</div>
+					<div class="answer-field">{{ form_widget(field, {'attr': {'class': 'form-control'}}) }}</div>
+					<div class="text-muted mt-2">{{ form_help(field) }}</div>
+					<div class="text-danger">{{ form_errors(field) }}</div>
+				</div>
+			{% endif %}
+		{% endfor %}
+		<div class="text-center">
+			<button class="btn btn-success btn-form-registration">Envoyer mes réponses</button>
+		</div>
+		{{ form_end(form, {'render_rest': false}) }}
+	</div>
 {% endblock %}

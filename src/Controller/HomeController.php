@@ -64,7 +64,7 @@ class HomeController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Événement créé avec succès !');
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_loader');
         }
 
         return $this->render('home/index.html.twig', [
@@ -114,6 +114,6 @@ public function joinRoom(Room $room, EntityManagerInterface $em): Response
     $em->flush();
 
     $this->addFlash('success', 'Vous avez rejoint l\'activité avec succès !');
-    return $this->redirectToRoute('app_home');
+    return $this->redirectToRoute('app_loader');
 }
 }

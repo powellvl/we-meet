@@ -73,9 +73,13 @@ class QuestionnaireController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Merci pour vos réponses ! Votre demande pour devenir professeur est en cours d\'examen.');
-            $this->addFlash('success', 'Vous pouvez connecter en attendant votre vérification, vous recevrez une confirmation par email.');
+            $this->addFlash('success', 'Veuillez vous connecter avec vos identifiants pour accéder à la plateforme.');
 
-            return $this->redirectToRoute('app_home');
+            // Déconnecter l'utilisateur pour forcer la connexion manuelle
+            $this->container->get('security.token_storage')->setToken(null);
+            $request->getSession()->invalidate();
+            
+            return $this->redirectToRoute('app_login');
         }
 
         // 5. Afficher le formulaire

@@ -4,20 +4,24 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Étape 2 : Choisissez les langues que vous parlez</h1>
-
+	<h1 class="mb-4">Choisissez les langues que vous voulez apprendre</h1>
+	<p class="language-description"">Si vous pensez avoir le niveau pour enseigner des langues, veillez à cliquer sur le bouton 
+							"Enseigner cette langue". Vous serez par la suite tester sur un
+							questionnaire pour établir votre niveau.</p>
 	{{ form_start(form) }}
 
-	<div class="language-management-collection">
+	<div id="languageCollection" data-prototype="{{ form_widget(form.languageManagements.vars.prototype)|e('html_attr') }}">
 		{% for languageForm in form.languageManagements %}
-			<div class="language-block" style="margin-bottom: 1rem;">
-				{{ form_row(languageForm.language) }}
-				{{ form_row(languageForm.isProfessor) }}
+			<div class="language-block mb-3">
+				{{ form_row(languageForm.language, {'attr': {'class': 'form-select language-select'}}) }}
+				{{ form_row(languageForm.isProfessor, {'attr': {'class': 'form-check-input'}}) }}
 			</div>
 		{% endfor %}
 	</div>
 
-	<button class="btn btn-primary">Valider et continuer</button>
+	<button class="btn-language-selection mt-3">Valider et continuer</button>
 
 	{{ form_end(form) }}
+
+	<script type="module" src="{{ asset('js/language-form.js') }}"></script>
 {% endblock %}

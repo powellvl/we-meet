@@ -1,0 +1,64 @@
+.avatar-placeholder {
+  width: 60px;
+  height: 60px;
+  background-color: #007bff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+.avatar-placeholder-profile {
+  width: 200px;
+  height: 200px;
+  background-color: #007bff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 5rem;
+  text-transform: uppercase;
+}
+
+/* Version plus petite pour le créateur dans la modale */
+#modalRoomCreatorAvatar.avatar-placeholder {
+  width: 60px;
+  height: 60px;
+  font-size: 1rem;
+}
+
+/* Version encore plus petite pour les participants */
+.participant-avatar.avatar-placeholder {
+  width: 60px;
+  height: 60px;
+  font-size: 0.8rem;
+  background-color: #ebc341;
+  margin-right: 5px;
+}
+
+.participant:nth-child(4n + 1) {
+  .avatar-placeholder {
+    background-color: rgb(238, 51, 51);
+  }
+}
+.participant:nth-child(4n + 2) {
+  .avatar-placeholder {
+    background-color: rgb(64, 64, 227);
+  }
+}
+.participant:nth-child(4n + 3) {
+  .avatar-placeholder {
+    background-color: rgb(242, 148, 41);
+  }
+}
+.participant:nth-child(4n + 4) {
+  .avatar-placeholder {
+    background-color: rgb(71, 231, 84);
+  }
+}

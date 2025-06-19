@@ -44,12 +44,20 @@ class AppCustomAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        // Vérifier si la connexion provient de la page de login
+        $referer = $request->headers->get('referer', '');
+        if (strpos($referer, 'login') !== false) {
+            // Il s'agit d'une connexion via le formulaire de login, rediriger vers le loader
+            return new RedirectResponse($this->urlGenerator->generate('app_loader'));
+        }
+        
+        // Pour les autres chemins (comme après inscription), utiliser le comportement par défaut
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
-
-        // For example:
-        return new RedirectResponse($this->urlGenerator->generate('app_loader'));
+        
+        // Si aucune redirection n'est définie, utiliser une redirection par défaut
+        return new RedirectResponse($this->urlGenerator->generate('app_home'));
     }
 
     protected function getLoginUrl(Request $request): string

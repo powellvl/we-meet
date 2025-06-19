@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Form\LanguageManagementType;
 use App\Form\LanguageManagementFormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -14,12 +15,12 @@ class LanguageManagementCollectionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('languageManagements', CollectionType::class, [
-            'entry_type' => LanguageManagementFormType::class,
-            'entry_options' => ['label' => false],
-            'allow_add' => false,
-            'allow_delete' => false,
-            'by_reference' => false,
-            'label' => false,
+    'entry_type' => LanguageManagementFormType::class,
+    'allow_add' => true,
+    'allow_delete' => true,
+    'by_reference' => false,
+    'prototype' => true,
+    'prototype_name' => '__name__',
         ]);
     }
 

@@ -14,6 +14,11 @@ export function initMap(rooms) {
       room.description;
     document.getElementById("modalRoomCreator").textContent =
       room.creator.firstname + " " + room.creator.lastname;
+
+    // Configurer l'avatar placeholder avec les initiales du créateur
+    document.getElementById("modalRoomCreatorInitials").textContent =
+      room.creator.firstname.charAt(0) + room.creator.lastname.charAt(0);
+
     document.getElementById("modalRoomDate").textContent = new Date(
       room.date
     ).toLocaleString("fr-FR");
@@ -52,11 +57,16 @@ export function initMap(rooms) {
       room.participants.forEach((p) => {
         const div = document.createElement("div");
         div.className =
-          "d-flex justify-content-between align-items-center p-2 rounded border bg-light shadow-sm";
+          "d-flex justify-content-between align-items-center p-2 bg-light shadow-sm participant";
 
         div.innerHTML = `
-          <div>${p.firstname} ${p.lastname}</div>
-          <span class="badge bg-${p.isProfessor ? "success" : "secondary"}">
+          <div class="d-flex align-items-center gap-2">
+            <div class="avatar-placeholder participant-avatar">
+              <span>${p.firstname.charAt(0)}${p.lastname.charAt(0)}</span>
+            </div>
+            <div>${p.firstname} ${p.lastname}</div>
+          </div>
+          <span class="badge-membre">
             ${p.isProfessor ? "Professeur" : "Élève"}
           </span>
         `;

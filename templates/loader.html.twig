@@ -35,17 +35,17 @@
 	</head>
 	<body>
 		<div style="display: flex
-																;
-															flex-direction: column;
-															align-items: center;;">
+																				;
+																			flex-direction: column;
+																			align-items: center;;">
 			<div class="loader"></div>
 			<div class="text">Chargement</div>
 		</div>
 		<script>
-			// Redirige vers la home après 2 secondes (ou moins si tu veux)
+			// Redirige vers la home après 2 secondes pour une meilleure expérience utilisateur
 setTimeout(function () {
-window.location.href = "{{ path('app_home') }}";
-}, 1000);
+window.location.href = "{{ redirect_to }}";
+}, 2000);
 		</script>
 	</body>
 </html>

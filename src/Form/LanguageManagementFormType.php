@@ -19,8 +19,11 @@ class LanguageManagementFormType extends AbstractType
                 'class' => Language::class,
                 'choice_label' => 'name',
                 'label' => 'Langue',
-                'placeholder' => 'Choisir une langue',
+                'placeholder' => 'Sélectionnez les langues que vous voulez apprendre',
                 'required' => false,
+                'attr' => [
+                    'class' => 'language-select',
+                ],
             ])
             ->add('isProfessor', CheckboxType::class, [
                 'label' => 'Souhaitez-vous enseigner cette langue ?',

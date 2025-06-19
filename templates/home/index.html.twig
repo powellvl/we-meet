@@ -84,14 +84,18 @@
 			<div class="modal-content shadow rounded-4">
 				<div class="modal-header bg-light border-bottom-0">
 					<div class="d-flex align-items-center gap-3">
-						
+						<div class="avatar-placeholder" id="modalRoomCreatorAvatar">
+							<span id="modalRoomCreatorInitials"></span>
+						</div>
 						<div>
 							<h5 class="modal-title mb-0" id="modalRoomTitle"></h5>
 							<div class="creator-info">
-							<p>Créer par</p><p id="modalRoomCreator"></p>
+								<p>Créer par</p>
+								<p id="modalRoomCreator"></p>
 							</div>
 							<div class="language-info">
-								<p>Language : </p>
+								<p>Language :
+								</p>
 								<span id="modalRoomEmoji" style="font-size: 2rem;"></span>
 								<small class="text-muted" id="modalRoomLanguage"></small>
 							</div>
@@ -112,8 +116,7 @@
 
 					<div>
 						<strong>Participants :</strong>
-						<div id="modalRoomParticipants" class="mt-2 d-flex flex-column gap-2">
-						</div>
+						<div id="modalRoomParticipants" class="mt-2 d-flex flex-column gap-2 roomparticipant"></div>
 					</div>
 				</div>
 				<div class="modal-footer border-top-0">
